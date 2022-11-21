@@ -3,5 +3,17 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/.sfdx": true
+  },
+  "author-header": {
+
+    "author": "Kiran Markad",
+    "contents": [
+      
+      "Salesforce Practice."
+    ],
+    "auto-comment-type": "//",
+    "auto-space": true,
+    "auto-title": true,
+    "auto-date-type": 1
   }
 }

@@ -1,3 +1,4 @@
+//
 import { LightningElement, track, wire } from 'lwc';
 import GET_CONTACTS from '@salesforce/apex/WireContactPractice.ContactPractice';
 import {NavigationMixin} from 'lightning/navigation';
