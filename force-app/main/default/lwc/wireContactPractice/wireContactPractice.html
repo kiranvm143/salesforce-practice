@@ -1,0 +1,99 @@
+<template>
+    <lightning-card title="Contact Practice" >
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <lightning-icon icon-name="standard:contact"></lightning-icon>
+                    
+                    <span class="slds-assistive-text">contact</span>
+                  
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <a href="#" class="slds-card__header-link slds-truncate" title="Contacts (1)">
+                      <span>Contacts ({ContactItem.length})</span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="slds-no-flex">
+                    <a href="javascript:void(0)">
+                  <button class="slds-button slds-button_neutral" onclick={newAction}>New</button>
+                </a>
+                </div>
+                <div class="slds-no-flex">
+                  <a href="javascript:void(0)">
+                <button class="slds-button slds-button_neutral" onclick={refeshData}>Refresh</button>
+              </a>
+              </div>
+              </header>
+            </div>
+            <div class="slds-card__body">
+              <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-table_fixed-layout" role="grid" aria-label="Example table in a Card">
+                <thead>
+                  <tr class="slds-line-height_reset">
+                    <th class="" scope="col" for:each={ContactHeader} for:item="item" key={item}>
+                      <div class="slds-truncate" title={item}>{item}</div>
+                    </th>
+                   
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="slds-hint-parent" for:each={ContactItem} for:item="con" key={con.id}>
+                    <th scope="row">
+                      <div class="slds-truncate" title={con.Name}>
+                        <a href={con.url} tabindex="-1">{con.Name}</a>
+                      </div>
+                    </th>
+                    
+                    <td role="gridcell">
+                      <div class="slds-truncate" title={con.Phone}>{con.Phone}</div>
+                    </td>
+                    <td role="gridcell">
+                      <div class="slds-truncate" title={con.Title}>{con.Title}</div>
+                    </td>
+                    <td role="gridcell">
+                      <div class="slds-truncate" title={con.Email}>{con.Email}</div>
+                    </td>
+                    <td>
+                     <c-contact-action record={con} objectname={obj}  ondelete ={eventHandler} ></c-contact-action>{recordid}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <footer class="slds-card__footer">
+              <a class="slds-card__footer-action" href="/lightning/o/Contact/list?filterName=00B5i0000046mHlEAI">View All
+                <span class="slds-assistive-text">Contacts</span>
+              </a>
+            </footer>
+          </article>
+          <template if:true={modal}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+              <div class="slds-modal__container">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeModal}>
+              
+              <lightning-icon icon-name="utility:close" class="large" variant="inverse"></lightning-icon>
+              <span class="slds-assistive-text">Cancel and close</span>
+              </button>
+              <div class="slds-modal__header">
+              <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Delete Contact</h1>
+              </div>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <p align="center">Are you sure you want to delete this contact?</p>
+              </div>
+              <div class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeModal}>Cancel</button>
+              <button class="slds-button slds-button_brand" onclick={deleteContact}>Delete</button>
+              </div>
+              </div>
+              </section>
+              <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+          </template>
+       
+        
+    </lightning-card>
+    
+</template>

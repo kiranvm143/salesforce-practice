@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Calculator" icon-name="standard:account">
+        <div class="slds-box slds-box_x-small">
+        <div class="slds-p-around_medium ">
+        <lightning-input class="slds-"  label="First Number" name="fno" onchange={handleevent}></lightning-input>
+        <lightning-input label="Second Number" name="sno" onchange={handleevent}></lightning-input><br/>
+       
+        <lightning-button-group>
+            <lightning-button label="Sum" variant="success" onclick={add}> </lightning-button>
+            <lightning-button label="Sub"  variant="brand" onclick={sub}> </lightning-button>
+            <lightning-button label="Mul" onclick={mul}> </lightning-button>
+            <lightning-button label="Div" variant="brand" onclick={div} > </lightning-button>
+         </lightning-button-group>
+        </div>
+         <div class="slds-text-heading_medium">
+            <b>Result: {Result}</b>
+         </div>
+        </div>
+    
+
+    </lightning-card>
+</template>
