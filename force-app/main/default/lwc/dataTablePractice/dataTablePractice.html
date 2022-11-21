@@ -1,9 +1,10 @@
 <template>
-    <lightning-card icon-name="standard:contact" label="Contact Datatable Practice">
+    <lightning-card icon-name="standard:contact" title="Contact Datatable Practice">
         <div>
-            <lightning-datatable columns={columns} data={data} key-field="Id">
+            <lightning-datatable columns={columns} data={data} key-field="Id" class="data-table" show-row-number-column onrowaction={rowAction}>
             </lightning-datatable>
         </div>
+        
     </lightning-card>
     
 </template>
