@@ -1,14 +1,20 @@
 import { LightningElement, track, wire } from 'lwc';
 import GET_CONTACTS from '@salesforce/apex/WireContactPractice.ContactPractice';
+import DELETECON from '@salesforce/apex/WireContactPractice.DeleteContacts';
 import {NavigationMixin} from 'lightning/navigation';
-//import {deleteRecord} from 'lightning/uiRecordApi';
-//import {ShowToastEvent} from 'lightning/platformShowToastEvent';
+import {deleteRecord} from 'lightning/uiRecordApi';
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
+
 
 
 export default class DataTablePractice extends NavigationMixin(LightningElement) {
-    
-   // selectedId;
-    //isModal=false;
+    @track displayOnchage=false;
+    @track multipleSelected=false;
+    @track spinner=false;
+    resultRefresh;
+    selectedId;
+    isModal=false;
     @track data;
     actions =[
         { label:'View', name:'view' },
@@ -29,12 +35,49 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
 
     @wire(GET_CONTACTS)
     contactWire (result) {
+       this.resultRefresh = result;
        
-       
+       this.data=[];
         if (result && result.data ) {
         this.data = result.data;
         } else if (result && result.error) {
         // TODO: error handling
+        }
+    }
+    onChange(){
+        let rowSelected = this.template.querySelector('lightning-datatable').getSelectedRows();
+        if(rowSelected.length >0){
+            this.displayOnchage=true;
+        }else{
+            this.displayOnchage=false;
+        }
+    }
+    deleteSelected(){
+        let rowSelected = this.template.querySelector('lightning-datatable').getSelectedRows();
+        if(rowSelected.length >0){
+            DELETECON({con : rowSelected})
+            .then(result =>{
+                this.dispatchEvent(
+                    new ShowToastEvent ({
+                        title : 'Record Deleted',
+                        message: "Recored Successfully deleted.",
+                        variant: "success"
+                    })
+                );
+                refreshApex(this.resultRefresh); 
+
+            })
+            .catch(error =>{
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title : 'Error',
+                        message: error.body.message,
+                        variant: 'error'
+                    })
+                );
+
+            });
+
         }
     }
 
@@ -43,14 +86,14 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
         let actionName= event.detail.action.name;
         
         let Id =event.detail.row.Id;
-       //this.selectedId = Id;
+       this.selectedId = Id;
 
 
        if(actionName== 'view' || actionName == 'edit'){
             this.navigationMixinAction(actionName,Id);
         }
         else if(actionName == 'delete'){
-           // this.confirmDelete();
+        this.confirmDelete();
         }
 
 
@@ -68,10 +111,12 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
         });
     }
 
-   /* deleteRecord(){
+    deleteRecord(){
         this.closeModal();
+        this.spinner=true;
         deleteRecord(this.selectedId)
         .then(()=>{
+
             this.dispatchEvent(
                 new ShowToastEvent({
                     title:'Success',
@@ -80,8 +125,9 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
 
                 })
             );
-           
-
+            this.spinner=false;
+                      
+            refreshApex(this.resultRefresh); 
 
         }
         )
@@ -96,6 +142,7 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
                     }
                 )
             );
+            this.spinner=false;
 
         });
     }
@@ -107,7 +154,6 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
     closeModal(){
         this.isModal=false;
     }
-*/
 
 
 

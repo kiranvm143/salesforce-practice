@@ -19,6 +19,15 @@ public with sharing class WireContactPractice {
         return acc;
     }
 
+    @AuraEnabled
+    public static void DeleteContacts(list<Contact> con){
+        try {
+            
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
     
     
 }
