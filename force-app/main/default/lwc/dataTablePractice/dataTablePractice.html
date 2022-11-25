@@ -1,17 +1,17 @@
 <template>
     <lightning-card icon-name="standard:contact" title="Contact Datatable Practice">
-        <div class="slds-clearfix">
-            <template if:true={displayOnchage}>
-                <lightning-button  class="slds-m-left_medium" label="Delete Selected" variant="destructive"  onclick={deleteSelected}></lightning-button>
-            </template>
-        </div>
+        
         <div>
             <lightning-datatable columns={columns} data={data} key-field="Id" class="data-table" show-row-number-column onrowaction={rowActionEvent} onrowselection={onChange} >
             </lightning-datatable>
             
         </div>
        
-
+        <div class="slds-clearfix">
+            <template if:true={displayOnchage}>
+                <lightning-button  class="slds-m-left_medium" label="Delete Selected" variant="destructive"  onclick={deleteSelected}></lightning-button>
+            </template>
+        </div>
 
         <template if:true={isModal}>
             <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">

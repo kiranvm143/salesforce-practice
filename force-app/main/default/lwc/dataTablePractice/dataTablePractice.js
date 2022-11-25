@@ -54,7 +54,8 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
     }
     deleteSelected(){
         let rowSelected = this.template.querySelector('lightning-datatable').getSelectedRows();
-        if(rowSelected.length >0){
+        
+            if(confirm('Do you really want to delete selected records?')){
             DELETECON({con : rowSelected})
             .then(result =>{
                 this.dispatchEvent(
@@ -77,6 +78,7 @@ export default class DataTablePractice extends NavigationMixin(LightningElement)
                 );
 
             });
+        
 
         }
     }
