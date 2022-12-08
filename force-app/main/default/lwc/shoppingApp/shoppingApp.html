@@ -1,0 +1,28 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around-small slds-box">
+        <lightning-tabset variant="scoped" class="slds-m-around-small">
+           
+            <lightning-tab label={productCount} icon-name="utility:product_workspace">
+                <lightning-tabset variant='scoped' class="slds-m-around-small">
+                    <lightning-tab  for:each={lstCategory} for:item="category" key={category}
+                                    label={category} icon-name="utility:products" onactive={getProduct} value={category}>
+
+                        <c-product product-details={lstProducts} onaddtocart ={cartDetails}></c-product>
+                    
+                        <template if:true={isSpinner}>
+                        <lightning-spinner variant="brand" size="medium"></lightning-spinner>
+                    </template>
+                    </lightning-tab>
+                </lightning-tabset>
+            </lightning-tab>
+
+            <lightning-tab label={cartCount} icon-name="utility:cart">
+                <c-shopping-app-cart cart-products={cartProducts} total ={total}></c-shopping-app-cart>
+            </lightning-tab>
+            </lightning-tabset>
+
+         </div>
+    </lightning-card>
+    
+</template>

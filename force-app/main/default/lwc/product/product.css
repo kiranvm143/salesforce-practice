@@ -1,0 +1,16 @@
+.product{
+    height:auto;
+    display:inline-block;
+    margin: 5px;
+    border-radius: 5px;
+    width: 170px;
+    border: 1px solid blueviolet;
+    padding: 10px;
+    
+
+}
+
+.img {
+    max-width: 120px;
+    height: 151px;
+}

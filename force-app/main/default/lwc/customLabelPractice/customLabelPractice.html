@@ -1,0 +1,24 @@
+<template>
+    <lightning-card icon-name="standard:Account" title="Custom Label And Resources">
+        <div class="slds-m-around_medium">
+            <lightning-tabset variant="scoped">
+                <lightning-tab label="Static Label">
+                    <h3>{labels.AccountMessage}</h3>
+                    <h4>{labels.test}</h4>
+                </lightning-tab>
+
+                <lightning-tab label="Static Resources">
+                    <img src={image} alt="image">
+                </lightning-tab>
+
+                <lightning-tab label="User Information">
+                    User Id : {userId}<br/>
+                    User Name : {userDetails.Name} <br/>
+                    User Email : {userDetails.Email}<br/>
+                    User Phone : {userDetails.Phone}
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </lightning-card>
+    
+</template>

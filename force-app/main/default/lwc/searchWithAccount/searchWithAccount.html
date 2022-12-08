@@ -1,0 +1,12 @@
+<template>
+    <lightning-card class="slds-m-margin_medium" title="Search Using  Imeritive">
+        <div>
+            <lightning-input label="Search Contact by Account Name" class="slds-box slds-box_small slds-m-around_large" onchange={searchAccount}></lightning-input>
+                <lightning-datatable key-field="Id"
+                                    columns={lstColumns}
+                                    data={lstData}
+                                    onrowaction={searchAction}></lightning-datatable>
+        </div>
+    </lightning-card>
+    
+</template>
